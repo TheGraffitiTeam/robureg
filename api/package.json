@@ -28,13 +28,13 @@
     "@nestjs/swagger": "^11.2.0",
     "@nestjs/typeorm": "^11.0.0",
     "bcrypt": "^6.0.0",
-    "better-sqlite3": "^12.4.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.2",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
+    "sql.js": "^1.13.0",
     "typeorm": "^0.3.27"
   },
   "devDependencies": {
