@@ -14,6 +14,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Select } from "@/components/ui/select"
+import { config } from "@/lib/config"
 
 // Zod schema matching the CreateRecruitDto
 const recruitSchema = z.object({
@@ -95,7 +96,7 @@ export function RecruitForm() {
 
     const onSubmit = async (data: RecruitFormData) => {
         try {
-            const response = await fetch("http://localhost:3000/recruits", {
+            const response = await fetch(`${config.apiUrl}/recruits`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

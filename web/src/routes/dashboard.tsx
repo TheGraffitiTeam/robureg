@@ -18,6 +18,7 @@ import {
     SheetDescription,
 } from "@/components/ui/sheet"
 import { Separator } from "@/components/ui/separator"
+import { config } from "@/lib/config"
 
 export const Route = createFileRoute('/dashboard')({
     component: Dashboard,
@@ -67,7 +68,7 @@ function Dashboard() {
 
     const fetchRecruits = async (token: string) => {
         try {
-            const response = await fetch("http://localhost:3000/recruits", {
+            const response = await fetch(`${config.apiUrl}/recruits`, {
                 headers: {
                     "Authorization": `Bearer ${token}`,
                 },

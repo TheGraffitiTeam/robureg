@@ -11,6 +11,7 @@ import {
     FieldGroup,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
+import { config } from "@/lib/config"
 
 export const Route = createFileRoute('/login')({
     component: Login,
@@ -35,7 +36,7 @@ function Login() {
 
     const onSubmit = async (data: LoginFormData) => {
         try {
-            const response = await fetch("http://localhost:3000/auth/login", {
+            const response = await fetch(`${config.apiUrl}/auth/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
