@@ -81,7 +81,7 @@ export function RecruitForm() {
             phoneNumber: "",
             enrollmentSemester: "",
             residentialSemester: "",
-            currentSemester: "",
+            currentSemester: "Fall 2025",
             preferedDepartment: "",
             preferedDepartment2: "",
             hobbies: "",
@@ -126,6 +126,13 @@ export function RecruitForm() {
 
     return (
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 max-w-2xl mx-auto p-6">
+            <div className="mb-6 -mx-6">
+                <img
+                    src="/images/registration_background.jpg"
+                    alt="Registration background"
+                    className="w-full h-40 md:h-56 object-cover lg:rounded-md"
+                />
+            </div>
             <div>
                 <h1 className="text-3xl font-bold">Recruitment Application</h1>
                 <p className="text-muted-foreground mt-2">
@@ -307,6 +314,7 @@ export function RecruitForm() {
                                 <Select
                                     id="currentSemester"
                                     aria-invalid={!!form.formState.errors.currentSemester}
+                                    disabled
                                     {...field}
                                 >
                                     {semesters.map((sem) => (

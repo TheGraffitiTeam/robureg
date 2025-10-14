@@ -24,7 +24,7 @@ export class RecruitService {
                 to: saved.personalEmail || saved.gsuiteEmail,
                 subject: 'ROBU Recruitment Registration Successful',
                 text: `Hi ${saved.firstName}, your registration has been received successfully. We will contact you with next steps.`,
-                html: `<p>Hi <strong>${saved.firstName}</strong>,</p><p>Your registration has been received successfully. We will contact you with next steps.</p><p>- ROBU Team</p>`
+                html: `<p>Dear <strong>${saved.firstName}</strong>,</p><p>Congratulations on going through the first step in becoming a member proud member of the Robotics Club of BRAC University. We will contact you with next steps.</p><p><strong>regards</strong> <br />Imtiaz, Robotics Club of BRAC University</p>`
             }).catch((err) => {
                 Logger.warn(`Failed to send registration email to ${saved.personalEmail || saved.gsuiteEmail}: ${err?.message}`);
             });
