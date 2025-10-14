@@ -32,6 +32,21 @@
 $ pnpm install
 ```
 
+## Email configuration
+
+Set the following environment variables for SMTP. Create a `.env` file in the project root or set them in your environment:
+
+```
+SMTP_HOST=smtp.yourprovider.com
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=your_smtp_username
+SMTP_PASS=your_smtp_password
+MAIL_FROM="ROBU Recruitment <noreply@yourdomain.com>"
+```
+
+On successful recruit creation, a confirmation email is sent to the user's `personalEmail` (fallback to `gsuiteEmail`).
+
 ## Compile and run the project
 
 ```bash

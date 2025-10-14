@@ -1,21 +1,35 @@
-import { Injectable, NotFoundException, ConflictException, BadRequestException } from '@nestjs/common';
+import { Injectable, NotFoundException, ConflictException, BadRequestException, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, QueryFailedError } from 'typeorm';
 import { Recruit } from './recruit.entity';
 import { CreateRecruitDto } from './dto/create-recruit.dto';
 import { UpdateRecruitDto } from './dto/update-recruit.dto';
+import { MailerService } from '@nestjs-modules/mailer';
 
 @Injectable()
 export class RecruitService {
     constructor(
         @InjectRepository(Recruit)
         private recruitRepository: Repository<Recruit>,
+        private readonly mailerService: MailerService,
     ) { }
 
     async create(createRecruitDto: CreateRecruitDto): Promise<Recruit> {
         try {
             const recruit = this.recruitRepository.create(createRecruitDto);
-            return await this.recruitRepository.save(recruit);
+            const saved = await this.recruitRepository.save(recruit);
+
+            // fire-and-forget email; don't block create on mail failures
+            void this.mailerService.sendMail({
+                to: saved.personalEmail || saved.gsuiteEmail,
+                subject: 'ROBU Recruitment Registration Successful',
+                text: `Hi ${saved.firstName}, your registration has been received successfully. We will contact you with next steps.`,
+                html: `<p>Hi <strong>${saved.firstName}</strong>,</p><p>Your registration has been received successfully. We will contact you with next steps.</p><p>- ROBU Team</p>`
+            }).catch((err) => {
+                Logger.warn(`Failed to send registration email to ${saved.personalEmail || saved.gsuiteEmail}: ${err?.message}`);
+            });
+
+            return saved;
         } catch (error) {
             if (error instanceof QueryFailedError) {
                 const message = error.message;
