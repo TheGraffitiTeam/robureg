@@ -52,11 +52,13 @@ const departments = [
     { value: "em", label: "Event Management (EM)" },
     { value: "sp", label: "Strategic Planning Department (SP)" },
     { value: "hr", label: "Human Resources Department (HR)" },
+    { value: "ad", label: "Arts & Design (A&D)" },
 ]
 
 // Semester options
 const semesters = [
     { value: "", label: "Select semester" },
+    { value: "N/A", label: "N/A" },
     { value: "Spring 2023", label: "Spring 2023" },
     { value: "Summer 2023", label: "Summer 2023" },
     { value: "Fall 2023", label: "Fall 2023" },
@@ -67,6 +69,8 @@ const semesters = [
     { value: "Summer 2025", label: "Summer 2025" },
     { value: "Fall 2025", label: "Fall 2025" },
 ]
+
+
 
 export function RecruitForm() {
     const navigate = useNavigate()
@@ -272,7 +276,7 @@ export function RecruitForm() {
                                     aria-invalid={!!form.formState.errors.enrollmentSemester}
                                     {...field}
                                 >
-                                    {semesters.map((sem) => (
+                                    {semesters.slice(2, semesters.length).map((sem) => (
                                         <option key={sem.value} value={sem.value}>
                                             {sem.label}
                                         </option>
